@@ -12,35 +12,66 @@ class FirstViewController: UIViewController {
 
     @IBOutlet weak var lblWelcome: UILabel!
     
+    @IBOutlet weak var switchRemember: UISwitch!
+    
+    @IBOutlet weak var txtEmail: UITextField!
+    
+    @IBOutlet weak var txtPassword: UITextField!
+    
+    @IBOutlet weak var lblRememberMe: UILabel!
+    
+    //@IBOutlet weak var switchRemeber: UISwitch!
     
     
-    override func viewDidAppear(_ animated: Bool) {
-        print("View DidAppear")
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        print("View DidAppear")
+//    }
+//
+//    override func viewWillAppear(_ animated: Bool) {
+//        print("view WillAppear")
+//    }
+//
+//    override func viewDidDisappear(_ animated: Bool) {
+//        print("view DidDisappear")
+//    }
+//
+//    override func viewWillDisappear(_ animated: Bool) {
+//        print("View WillDisappear")
+//    }
     
-    override func viewWillAppear(_ animated: Bool) {
-        print("view WillAppear")
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        print("view Did Disappear")
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        print("View WillDisappear")
-    }
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-        lblWelcome.text = " Welcome to IOS Programming"
-        
+        lblWelcome.text = " Trip4U Login"
         print(lblWelcome.text!)
-        
+        let ud = UserDefaults.standard
+        if let tempEmail = ud.string(forKey: "email")
+        {
+            txtEmail.text = tempEmail
+        }
+        if let temppassword = ud.string(forKey: "password")
+        {
+            txtPassword.text = temppassword
+        }
+    
     }
     
     @IBAction func btnClickMeTap(_ sender: UIButton)
     {
-        lblWelcome.text = "ohh Dont click me"
+        lblWelcome.text = "Login Successfull"
+        if switchRemember.isOn
+        {
+            UserDefaults.standard.set(txtEmail.text, forKey: "email")
+            UserDefaults.standard.set(txtPassword.text, forKey: "password")
+        }
+        else
+        {
+            UserDefaults.standard.removeObject(forKey: "email")
+            UserDefaults.standard.removeObject(forKey: "password")
+            
+        }
     }
+    
     
 }
 
